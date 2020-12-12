@@ -1,0 +1,19 @@
+.title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.stock_row {
+  font-size: 18px;
+  font-weight: 500;
+  border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.stock_row:hover {
+  cursor: pointer;
+  background-color: rgba(213, 238, 255, 0.5);
+}
+
+.price {
+  transition: color 0.1s;
+}

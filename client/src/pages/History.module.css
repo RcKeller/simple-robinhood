@@ -1,0 +1,19 @@
+.back_btn {
+  font-weight: 500;
+  color: rgb(153, 153, 153);
+  transition: color 0.2s;
+}
+
+.back_btn:hover {
+  color: rgb(90, 90, 90);
+}
+
+.ticker {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.price {
+  font-weight: 500;
+  transition: color 0.1s;
+}
