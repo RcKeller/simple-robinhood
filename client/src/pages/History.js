@@ -48,7 +48,7 @@ const History = ({ stocks }) => {
         <div className={common_styles.spinner_container}>
           <Spinner className="m-auto" animation="border" />
         </div>
-      ) : (
+      ) : index >= 0 ? (
         <>
           <Row className={styles.ticker + " mx-auto justify-content-center"}>
             {ticker}
@@ -77,6 +77,8 @@ const History = ({ stocks }) => {
             />
           </Row>
         </>
+      ) : (
+        <div>Invalid Ticker</div>
       )}
     </div>
   );
