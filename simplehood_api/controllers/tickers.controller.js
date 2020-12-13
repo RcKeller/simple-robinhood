@@ -2,8 +2,8 @@ const http = require("http");
 
 const getTickers = (req, res) => {
   const options = {
-    hostname: "localhost",
-    port: 5000,
+    hostname: process.env.API_URL || "localhost",
+    port: process.env.API_PORT || 5000,
     path: "/tickers",
     method: "GET",
   };

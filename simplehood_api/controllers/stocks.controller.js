@@ -7,8 +7,8 @@ const getStocks = (req, res) => {
     tickers: tickers,
   });
   const options = {
-    hostname: "localhost",
-    port: 5000,
+    hostname: process.env.API_URL || "localhost",
+    port: process.env.API_PORT || 5000,
     path: "/stocks",
     method: "POST",
     headers: {
@@ -36,8 +36,8 @@ const getStocks = (req, res) => {
 const getHistory = (req, res) => {
   const ticker = req.params.ticker;
   const options = {
-    hostname: "localhost",
-    port: 5000,
+    hostname: process.env.API_URL || "localhost",
+    port: process.env.API_PORT || 5000,
     path: `/stocks/history/${ticker}`,
     method: "GET",
   };
