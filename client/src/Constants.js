@@ -43,5 +43,10 @@ export const chart_options = {
     x: {
       format: "MMM dd h:mmtt",
     },
+    y: {
+      formatter: function (val) {
+        return val.toFixed(2);
+      },
+    },
   },
 };
