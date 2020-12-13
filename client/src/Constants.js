@@ -22,12 +22,17 @@ export const chart_options = {
     title: {
       text: "Price",
     },
+    labels: {
+      formatter: function (val) {
+        return val.toFixed(0);
+      },
+    },
   },
   xaxis: {
     type: "datetime",
     labels: {
       datetimeUTC: false,
-      format: "h:mmtt",
+      format: "MM-dd h:mmtt",
     },
     tooltip: {
       enabled: false,
