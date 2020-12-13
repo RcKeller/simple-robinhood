@@ -60,7 +60,7 @@ const History = ({ stocks }) => {
               color: stocks[index][2],
             }}
           >
-            {index !== -1 ? stocks[index][1] : ""}
+            {index !== -1 ? stocks[index][1].toFixed(2) : ""}
           </Row>
           <Row className="mx-auto">
             <Chart

@@ -28,7 +28,7 @@ const Home = ({ stocks }) => {
                   color: stock[2],
                 }}
               >
-                {stock[1]}
+                {stock[1].toFixed(2)}
               </div>
             </Row>
           </Link>

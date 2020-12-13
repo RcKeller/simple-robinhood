@@ -6,7 +6,7 @@ var stocks;
 var cnt = 0;
 
 const randBetween = (a, b) => {
-  return (Math.random() * (b - a) + a).toFixed(2);
+  return Math.random() * (b - a) + a;
 };
 
 const initializeStocks = () => {
