@@ -20,7 +20,7 @@ const History = ({ stocks }) => {
 
   const getHistory = useCallback(() => {
     axios
-      .get(`http://localhost:4000/stocks/history/${ticker}`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}stocks/history/${ticker}`)
       .then((response) => {
         setHistory(response.data);
       })

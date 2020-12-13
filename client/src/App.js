@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     if (!tickers.length) {
       axios
-        .get("http://localhost:4000/tickers")
+        .get(`${process.env.REACT_APP_BACKEND_URL}tickers`)
         .then((response) => {
           setTickers(response.data);
         })
@@ -22,7 +22,7 @@ function App() {
     }
     const interval = setInterval(() => {
       axios
-        .post("http://localhost:4000/stocks", {
+        .post(`${process.env.REACT_APP_BACKEND_URL}stocks`, {
           tickers: tickers,
         })
         .then((response) => {
