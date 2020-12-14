@@ -27,7 +27,15 @@ function App() {
         })
         .then((response) => {
           // console.log(response.data);
-          setStocks(response.data);
+          let new_stocks = [...response.data];
+          new_stocks.forEach((stock, index) => {
+            stock.push(
+              stocks.length === 0 || stock[1] > stocks[index][1]
+                ? "green"
+                : "red"
+            );
+          });
+          setStocks(new_stocks);
         })
         .catch((error) => {
           console.log(error);
@@ -37,7 +45,7 @@ function App() {
     return () => {
       clearInterval(interval);
     };
-  }, [tickers]);
+  }, [tickers, stocks]);
   return (
     <div className={styles.container}>
       <Router>

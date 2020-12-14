@@ -14,7 +14,7 @@ const initializeStocks = () => {
   Ticker.find()
     .then((tickers) => {
       tickers.forEach((ticker) => {
-        stocks[ticker.name] = [ticker.init_price, "black"];
+        stocks[ticker.name] = ticker.init_price;
       });
     })
     .catch((err) => console.log("Error: " + err));
@@ -24,13 +24,12 @@ const test = setInterval(() => {
   if (!stocks) initializeStocks();
   for (let ticker in stocks) {
     stocks[ticker];
-    const prev_price = stocks[ticker][0];
-    stocks[ticker][0] = randBetween(0.95 * prev_price, 1.05 * prev_price);
-    stocks[ticker][1] = stocks[ticker][0] > prev_price ? "green" : "red";
+    const prev_price = stocks[ticker];
+    stocks[ticker] = randBetween(0.95 * prev_price, 1.05 * prev_price);
     if (cnt % 60 === 0) {
       const newStockEvent = new Stock({
         ticker: ticker,
-        price: stocks[ticker][0],
+        price: stocks[ticker],
       });
       newStockEvent
         .save()
@@ -50,7 +49,7 @@ const getStocks = (req, res) => {
   let ret = [];
   tickers.forEach((ticker) => {
     if (!stocks[ticker]) return;
-    ret.push([ticker, stocks[ticker][0], stocks[ticker][1]]);
+    ret.push([ticker, stocks[ticker]]);
   });
   res.json(ret);
 };
