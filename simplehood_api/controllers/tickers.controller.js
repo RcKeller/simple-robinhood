@@ -1,6 +1,8 @@
 const http = require("http");
 
+// API Route to fetch list of tickers
 const getTickers = (req, res) => {
+  // Options for request
   const options = {
     hostname: process.env.API_URL || "localhost",
     port: process.env.API_PORT || 5000,
@@ -13,6 +15,7 @@ const getTickers = (req, res) => {
       body += d;
     });
     http_res.on("end", () => {
+      // Request complete. Return data
       res.json(JSON.parse(body));
     });
   });
@@ -22,23 +25,6 @@ const getTickers = (req, res) => {
   http_req.end();
 };
 
-const addTicker = (req, res) => {
-  const name = req.body.name;
-  const init_price = req.body.init_price;
-  const newTicker = new Ticker({
-    name: name,
-    init_price: init_price,
-  });
-  newTicker
-    .save()
-    .then(() => {
-      console.log("new ticker added!");
-      res.json("new ticket added!");
-    })
-    .catch((err) => res.status(400).json("Error: " + err));
-};
-
 module.exports = {
   getTickers: getTickers,
-  addTicker: addTicker,
 };

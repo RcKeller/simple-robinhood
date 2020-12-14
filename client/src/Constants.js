@@ -1,3 +1,4 @@
+// Options to use when rendering Apex Chart
 export const chart_options = {
   chart: {
     type: "area",
