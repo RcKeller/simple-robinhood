@@ -37,8 +37,8 @@ const test = setInterval(() => {
     const prev_price = stocks[ticker];
     // Set new price
     stocks[ticker] = randBetween(0.95 * prev_price, 1.05 * prev_price);
-    // Add to historical data in db every minute
-    if (cnt % 60 === 0) {
+    // Add to historical data in db every minute if production
+    if (cnt % 60 === 0 && process.env.PORT) {
       const newStockEvent = new Stock({
         ticker: ticker,
         price: stocks[ticker],
