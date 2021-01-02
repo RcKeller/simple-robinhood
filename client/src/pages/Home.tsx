@@ -5,7 +5,7 @@ import styles from "./Home.module.css";
 import common_styles from "./common.module.css";
 
 // Home page
-const Home = ({ stocks }) => {
+const Home = ({ stocks }: { stocks: any[][] }) => {
   return (
     <div className={common_styles.container + " m-auto"}>
       <Row className={styles.title + " mx-auto mb-2 justify-content-center"}>

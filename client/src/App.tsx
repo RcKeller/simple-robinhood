@@ -8,7 +8,7 @@ import axios from "axios";
 
 function App() {
   // List of stock prices
-  const [stocks, setStocks] = useState<(string | number)[][]>([]);
+  const [stocks, setStocks] = useState<any[][]>([]);
   // List of stock tickers
   const [tickers, setTickers] = useState<string[]>([]);
   // On page render....
@@ -32,9 +32,8 @@ function App() {
         })
         .then((response) => {
           // console.log(response.data);
-
           // initialize list for new stock prices
-          let new_stocks = [...response.data];
+          let new_stocks: any[][] = [...response.data];
           // get color for each ticker by comparing new price with old price
           new_stocks.forEach((stock, index) => {
             stock.push(
@@ -43,6 +42,7 @@ function App() {
                 : "red"
             );
           });
+          console.log(new_stocks);
           setStocks(new_stocks);
         })
         .catch((error) => {
