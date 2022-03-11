@@ -8,9 +8,9 @@ import axios from "axios";
 
 function App() {
   // List of stock prices
-  const [stocks, setStocks] = useState<(string | number)[][]>([]);
+  const [stocks, setStocks] = useState([]);
   // List of stock tickers
-  const [tickers, setTickers] = useState<string[]>([]);
+  const [tickers, setTickers] = useState([]);
   // On page render....
   useEffect(() => {
     // Fetch list of tickers if we haven't already
