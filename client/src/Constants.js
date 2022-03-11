@@ -24,7 +24,7 @@ export const chart_options = {
       text: "Price",
     },
     labels: {
-      formatter: function (val : number) {
+      formatter: function (val) {
         return val.toFixed(0);
       },
     },
@@ -45,7 +45,7 @@ export const chart_options = {
       format: "MMM dd h:mmtt",
     },
     y: {
-      formatter: function (val : number) {
+      formatter: function (val) {
         return val.toFixed(2);
       },
     },
