@@ -8,12 +8,9 @@ import axios from "axios";
 import Chart from "react-apexcharts";
 import { chart_options } from "../Constants";
 
-const History = ({ stocks }: { stocks: any[][] }) => {
+const History = ({ stocks }) => {
   // Get ticker from url
-  const params: { ticker: string } = useParams();
-  const ticker: string = params.ticker;
-
-  // const { ticker: string } = useParams();
+  const { ticker } = useParams();
   // List of historical prices
   const [history, setHistory] = useState([]);
   // Get the index of the current ticker in the stocks list
