@@ -30,7 +30,7 @@ const getStocks = (req, res) => {
     });
     http_res.on("end", () => {
       // Request complete. Return prices
-      console.log("updated stock");
+      // console.log("updated stock");
       res.json(JSON.parse(body));
     });
   });

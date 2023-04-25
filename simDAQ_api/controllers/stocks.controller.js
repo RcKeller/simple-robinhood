@@ -3,13 +3,27 @@ const Stock = require("../models/stocks.model");
 const Ticker = require("../models/tickers.model");
 
 // Object to hold prices that will be updated every second
-var stocks;
+let stocks;
 // Counts how many seconds the program has been running for
-var cnt = 0;
+let cnt = 0;
 
 // Get random number in between a and b
 const randBetween = (a, b) => {
   return Math.random() * (b - a) + a;
+};
+
+const TICKERS = [
+  { name: "AAPL", init_price: 100 },
+  { name: "MSFT", init_price: 200 },
+  { name: "GOOG", init_price: 300 },
+  { name: "AMZN", init_price: 400 },
+  { name: "FB", init_price: 500 },
+];
+
+const initializeTickers = async () => {
+  return await Promise.all(
+    TICKERS.map(async (ticker) => await Ticker.create(ticker))
+  );
 };
 
 // Function to initialize stocks object when server first starts up
@@ -17,7 +31,10 @@ const initializeStocks = () => {
   stocks = {};
   // Fetch list of tickers from db
   Ticker.find()
-    .then((tickers) => {
+    .then(async (tickers) => {
+      if (!tickers?.length) {
+        tickers = await initializeTickers();
+      }
       tickers.forEach((ticker) => {
         // Add this ticker and its initial price to stocks object
         stocks[ticker.name] = ticker.init_price;
@@ -51,7 +68,8 @@ const test = setInterval(() => {
   }
   // Increment cnt and display updated message
   cnt++;
-  console.log("updated: ", cnt);
+
+  // console.log("updated: ", cnt);
 }, 1000);
 
 // Stops function from running every second. For debugging
