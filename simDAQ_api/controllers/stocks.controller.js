@@ -35,10 +35,12 @@ const initializeStocks = () => {
       if (!tickers?.length) {
         tickers = await initializeTickers();
       }
-      tickers.forEach((ticker) => {
-        // Add this ticker and its initial price to stocks object
-        stocks[ticker.name] = ticker.init_price;
-      });
+      for (const ticker of tickers) {
+        const latestStockEvent = await Stock.findOne({
+          ticker: ticker.name,
+        }).sort({ createdAt: -1 });
+        stocks[ticker.name] = latestStockEvent.price || ticker.init_price;
+      }
     })
     .catch((err) => console.log("Error: " + err));
 };
