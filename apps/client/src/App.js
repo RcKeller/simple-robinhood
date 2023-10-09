@@ -1,10 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "./App.module.css";
-import Home from "./pages/Home";
-import History from "./pages/History";
-import axios from "axios";
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from './App.module.css';
+import Home from './pages/Home';
+import History from './pages/History';
+import axios from 'axios';
 
 function App() {
   // List of stock prices
@@ -17,7 +21,7 @@ function App() {
     // Fetch list of tickers if we haven't already
     if (!tickers.length) {
       axios
-        .get(`${process.env.REACT_APP_BACKEND_URL}tickers`)
+        .get(`${process.env.REACT_APP_SIMPLEHOOD_API_HOST}/tickers`)
         .then((response) => {
           setTickers(response.data);
         })
@@ -32,7 +36,7 @@ function App() {
     const interval = setInterval(() => {
       if (!tickers.length) return;
       axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}stocks`, {
+        .post(`${process.env.REACT_APP_SIMPLEHOOD_API_HOST}/stocks`, {
           tickers: tickers,
         })
         .then((response) => {
@@ -43,8 +47,8 @@ function App() {
             stock.push(
               stocksPrev.current.length === 0 ||
                 stock[1] > stocksPrev.current[index][1]
-                ? "green"
-                : "red"
+                ? 'green'
+                : 'red'
             );
           });
           setStocks(new_stocks);
