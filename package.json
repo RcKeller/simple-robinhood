@@ -4,7 +4,6 @@
   "private": true,
   "engines": {
     "node": "^18.16.0",
-    "npm": "please-use-yarn",
     "yarn": "^1.22.17"
   },
   "description": "",
@@ -13,10 +12,10 @@
     "apps/*"
   ],
   "scripts": {
-    "test": "dotenv -e .env turbo test",
-    "build": "dotenv -e .env turbo build",
-    "dev": "dotenv -e .env turbo dev",
-    "start": "dotenv -e .env turbo start"
+    "test": "dotenv -e .env turbo run test",
+    "build": "dotenv -e .env turbo run build",
+    "dev": "dotenv -e .env turbo run dev",
+    "start": "dotenv -e .env turbo run start"
   },
   "author": "Andy Barrows <andy@barrfitz.com>",
   "license": "MIT",

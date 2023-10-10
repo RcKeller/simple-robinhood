@@ -14,7 +14,7 @@ const getStocks = (req, res) => {
     // Use heroku hostname from env variables if in production; otherwise, use localhost for dev
     hostname: process.env.API_URL || 'localhost',
     // Use heroku post if in production, otherwise use 5000 for dev
-    port: process.env.SIMDAQ_PORT || 5000,
+    port: process.env.PORT || 5000,
     path: '/stocks',
     method: 'POST',
     headers: {
@@ -48,7 +48,7 @@ const getHistory = (req, res) => {
   // Options for request. Use same hostname and port as before
   const options = {
     hostname: process.env.API_URL || 'localhost',
-    port: process.env.SIMDAQ_PORT || 5000,
+    port: process.env.PORT || 5000,
     path: `/stocks/history/${ticker}`,
     method: 'GET',
   };
