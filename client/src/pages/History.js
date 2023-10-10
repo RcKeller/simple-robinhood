@@ -1,12 +1,17 @@
-import React, { useMemo, useState, useEffect, useCallback } from "react";
-import styles from "./History.module.css";
-import common_styles from "./common.module.css";
+import React, {
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
+import styles from './History.module.css';
+import common_styles from './common.module.css';
 
-import { Row, Spinner } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import axios from "axios";
-import Chart from "react-apexcharts";
-import { chart_options } from "../Constants";
+import { Row, Spinner } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
+import Chart from 'react-apexcharts';
+import { chart_options } from '../Constants';
 
 const History = ({ stocks }) => {
   // Get ticker from url
@@ -24,7 +29,9 @@ const History = ({ stocks }) => {
   // Function to fetch historical data from api
   const getHistory = useCallback(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}stocks/history/${ticker}`)
+      .get(
+        `${process.env.SIMPLEHOOD_API_HOST}/stocks/history/${ticker}`
+      )
       .then((response) => {
         setHistory(response.data);
       })
@@ -62,17 +69,23 @@ const History = ({ stocks }) => {
         // Valid ticker
         <>
           {/* Stock Ticker */}
-          <Row className={styles.ticker + " mx-auto justify-content-center"}>
+          <Row
+            className={
+              styles.ticker + ' mx-auto justify-content-center'
+            }
+          >
             {ticker}
           </Row>
           {/* Stock Price */}
           <Row
-            className={styles.price + " mx-auto justify-content-center"}
+            className={
+              styles.price + ' mx-auto justify-content-center'
+            }
             style={{
               color: stocks[index][2],
             }}
           >
-            {index !== -1 ? stocks[index][1].toFixed(2) : ""}
+            {index !== -1 ? stocks[index][1].toFixed(2) : ''}
           </Row>
           {/* Stock History */}
           <Row className="mx-auto">

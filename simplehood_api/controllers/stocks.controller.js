@@ -1,4 +1,4 @@
-const http = require("http");
+const http = require('http');
 
 // API Route to get stock prices
 const getStocks = (req, res) => {
@@ -12,29 +12,29 @@ const getStocks = (req, res) => {
   // Options to be used in API request
   const options = {
     // Use heroku hostname from env variables if in production; otherwise, use localhost for dev
-    hostname: process.env.API_URL || "localhost",
+    hostname: process.env.API_URL || 'localhost',
     // Use heroku post if in production, otherwise use 5000 for dev
-    port: process.env.API_PORT || 5000,
-    path: "/stocks",
-    method: "POST",
+    port: process.env.SIMDAQ_PORT || 5000,
+    path: '/stocks',
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "Content-Length": data.length,
+      'Content-Type': 'application/json',
+      'Content-Length': data.length,
     },
   };
   // Get stock prices from simDAQ API
   const http_req = http.request(options, (http_res) => {
-    var body = "";
-    http_res.on("data", (d) => {
+    var body = '';
+    http_res.on('data', (d) => {
       body += d;
     });
-    http_res.on("end", () => {
+    http_res.on('end', () => {
       // Request complete. Return prices
       // console.log("updated stock");
       res.json(JSON.parse(body));
     });
   });
-  http_req.on("error", (error) => {
+  http_req.on('error', (error) => {
     console.error(error);
   });
   http_req.write(data);
@@ -47,22 +47,22 @@ const getHistory = (req, res) => {
   const ticker = req.params.ticker;
   // Options for request. Use same hostname and port as before
   const options = {
-    hostname: process.env.API_URL || "localhost",
-    port: process.env.API_PORT || 5000,
+    hostname: process.env.API_URL || 'localhost',
+    port: process.env.SIMDAQ_PORT || 5000,
     path: `/stocks/history/${ticker}`,
-    method: "GET",
+    method: 'GET',
   };
   const http_req = http.request(options, (http_res) => {
-    var body = "";
-    http_res.on("data", (d) => {
+    var body = '';
+    http_res.on('data', (d) => {
       body += d;
     });
-    http_res.on("end", () => {
+    http_res.on('end', () => {
       // Request complete
       res.json(JSON.parse(body));
     });
   });
-  http_req.on("error", (error) => {
+  http_req.on('error', (error) => {
     console.error(error);
   });
   http_req.end();
