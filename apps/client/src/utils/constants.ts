@@ -1,16 +1,16 @@
 // Options to use when rendering Apex Chart
 export const chart_options = {
   chart: {
-    type: "area",
+    type: 'area',
     stacked: false,
     height: 350,
     zoom: {
-      type: "x",
+      type: 'x',
       enabled: true,
       autoScaleYaxis: true,
     },
     toolbar: {
-      autoSelected: "zoom",
+      autoSelected: 'zoom',
     },
   },
   dataLabels: {
@@ -21,19 +21,19 @@ export const chart_options = {
   },
   yaxis: {
     title: {
-      text: "Price",
+      text: 'Price',
     },
     labels: {
-      formatter: function (val) {
-        return val.toFixed(0);
+      formatter: function (val: any) {
+        return val?.toFixed(0);
       },
     },
   },
   xaxis: {
-    type: "datetime",
+    type: 'datetime',
     labels: {
       datetimeUTC: false,
-      format: "MM-dd h:mmtt",
+      format: 'MM-dd h:mmtt',
     },
     tooltip: {
       enabled: false,
@@ -42,10 +42,10 @@ export const chart_options = {
   tooltip: {
     shared: false,
     x: {
-      format: "MMM dd h:mmtt",
+      format: 'MMM dd h:mmtt',
     },
     y: {
-      formatter: function (val) {
+      formatter: function (val: any) {
         return val.toFixed(2);
       },
     },

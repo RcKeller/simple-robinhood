@@ -1,21 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from './App.module.css';
-import Home from './pages/Home';
-import History from './pages/History';
 import axios from 'axios';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-function App() {
-  // List of stock prices
-  const [stocks, setStocks] = useState([]);
-  const stocksPrev = useRef([]);
-  // List of stock tickers
-  const [tickers, setTickers] = useState([]);
+export interface StocksState {
+  stocks: Array<[string, number | null, string]>;
+  tickers: string[];
+}
+
+const initialContext: StocksState = {
+  stocks: [],
+  tickers: [],
+};
+
+const StocksContext = createContext<StocksState>(initialContext);
+
+export function StocksProvider({ children }: { children?: React.ReactNode }) {
+  const [stocks, setStocks] = useState<StocksState["stocks"]>([]);
+  const [tickers, setTickers] = useState<StocksState["tickers"]>([]);
+
   // On page render....
   useEffect(() => {
     // Fetch list of tickers if we haven't already
@@ -45,14 +46,13 @@ function App() {
           // get color for each ticker by comparing new price with old price
           new_stocks.forEach((stock, index) => {
             stock.push(
-              stocksPrev.current.length === 0 ||
-                stock[1] > stocksPrev.current[index][1]
+              stocks.length === 0 ||
+                stock[1] > (stocks as any)[index][1]
                 ? 'green'
                 : 'red'
             );
           });
           setStocks(new_stocks);
-          stocksPrev.current = new_stocks;
         })
         .catch((error) => {
           console.log(error);
@@ -63,25 +63,19 @@ function App() {
       // Stop fetching if page is unmounted
       clearInterval(interval);
     };
-  }, [tickers]);
+  }, [tickers, stocks, setStocks]);
 
   return (
-    <div className={styles.container}>
-      <Router>
-        <Switch>
-          {/* Path to view a stock's history */}
-          <Route
-            path="/history/:ticker"
-            render={(props) => <History {...props} stocks={stocks} />}
-          />
-          {/* Path to view home page with all stocks */}
-          <Route path="/">
-            <Home stocks={stocks} />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <StocksContext.Provider value={{ stocks, tickers }}>
+      {children}
+    </StocksContext.Provider>
   );
 }
 
-export default App;
+export function useStocks() {
+  const context = useContext(StocksContext);
+  if (!context) {
+    throw new Error('useStocks must be used within a ProvideStocks');
+  }
+  return context;
+}
