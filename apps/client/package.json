@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@rckeller/robinhood-ui": "*",
     "apexcharts": "^3.22.3",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",

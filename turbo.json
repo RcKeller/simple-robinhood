@@ -7,21 +7,26 @@
       "cache": false,
       "persistent": true
     },
+    "lint": {},
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": [],
+      "cache": false
+    },
     "start": {
-      "dependsOn": ["build"],
+      "dependsOn": ["build", "^build"],
       "cache": false,
       "persistent": true
     },
-    "test": {
-      "cache": false
-    },
     "build": {
+      "dependsOn": ["^build"],
       "outputs": [
         "dist/**",
         "dist-*/**",
         "build/**",
         "api/**",
-        "public/build/**"
+        "public/build/**",
+        "storybook-static/**"
       ]
     }
   }
