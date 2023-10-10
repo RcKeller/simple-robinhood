@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const app = express();
 // Get port from environment variables. If none, use port 5000 for development
-const PORT = process.env.SIMDAQ_PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());

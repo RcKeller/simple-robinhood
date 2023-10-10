@@ -5,7 +5,7 @@ const getTickers = (req, res) => {
   // Options for request
   const options = {
     hostname: process.env.API_URL || 'localhost',
-    port: process.env.SIMDAQ_PORT || 5000,
+    port: process.env.PORT || 5000,
     path: '/tickers',
     method: 'GET',
   };
