@@ -5,7 +5,7 @@ const getTickers = (req, res) => {
   // Options for request
   const options = {
     hostname: process.env.API_URL || 'localhost',
-    port: process.env.PORT || 5000,
+    port: process.env.NODE_ENV === 'development' ? 5000 : undefined,
     path: '/tickers',
     method: 'GET',
   };
