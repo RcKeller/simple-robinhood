@@ -116,6 +116,7 @@ package-lock.json
 **/build/**
 **/dist/**
 **/.next/**
+**/storybook-static/**
 
 test-results/
 

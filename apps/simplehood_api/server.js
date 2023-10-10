@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const app = express();
 // Use port from environment variables. If n/a, use port 4000 for dev
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
