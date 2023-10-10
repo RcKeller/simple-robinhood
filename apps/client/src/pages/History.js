@@ -30,7 +30,7 @@ const History = ({ stocks }) => {
   const getHistory = useCallback(() => {
     axios
       .get(
-        `${process.env.SIMPLEHOOD_API_HOST}/stocks/history/${ticker}`
+        `${process.env.REACT_APP_SIMPLEHOOD_API_HOST}/stocks/history/${ticker}`
       )
       .then((response) => {
         setHistory(response.data);

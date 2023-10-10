@@ -1,0 +1,14 @@
+{
+  "name": "simplehood-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "yarn install && nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "max-yuan",
+  "license": "ISC"
+}

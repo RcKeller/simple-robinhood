@@ -21,7 +21,7 @@ function App() {
     // Fetch list of tickers if we haven't already
     if (!tickers.length) {
       axios
-        .get(`${process.env.SIMPLEHOOD_API_HOST}/tickers`)
+        .get(`${process.env.REACT_APP_SIMPLEHOOD_API_HOST}/tickers`)
         .then((response) => {
           setTickers(response.data);
         })
@@ -36,7 +36,7 @@ function App() {
     const interval = setInterval(() => {
       if (!tickers.length) return;
       axios
-        .post(`${process.env.SIMPLEHOOD_API_HOST}/stocks`, {
+        .post(`${process.env.REACT_APP_SIMPLEHOOD_API_HOST}/stocks`, {
           tickers: tickers,
         })
         .then((response) => {
