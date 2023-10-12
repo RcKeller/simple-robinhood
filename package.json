@@ -12,10 +12,12 @@
     "apps/*"
   ],
   "scripts": {
+    "lint": "dotenv -e .env turbo run lint",
     "test": "dotenv -e .env turbo run test",
     "build": "dotenv -e .env turbo run build",
     "dev": "dotenv -e .env turbo run dev",
-    "start": "dotenv -e .env turbo run start"
+    "start": "dotenv -e .env turbo run start",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "author": "Andy Barrows <andy@barrfitz.com>",
   "license": "MIT",

@@ -1,2 +1,2 @@
-export * from './HistoryPage';
-export * from './HomePage';
+export * from './HistoryPage'
+export * from './HomePage'

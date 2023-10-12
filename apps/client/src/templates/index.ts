@@ -1,1 +1,1 @@
-export * from './AppTemplate';
+export * from './AppTemplate'

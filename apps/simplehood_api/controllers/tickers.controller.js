@@ -1,30 +1,30 @@
-const http = require('http');
+const http = require('http')
 
 // API Route to fetch list of tickers
 const getTickers = (req, res) => {
   // Options for request
   const options = {
     hostname: process.env.API_URL || 'localhost',
-    port: process.env.NODE_ENV === 'development' ? 5000 : undefined,
+    port: (!process.env.API_URL && process.env.PORT) || 5000,
     path: '/tickers',
     method: 'GET',
-  };
+  }
   const http_req = http.request(options, (http_res) => {
-    var body = '';
+    var body = ''
     http_res.on('data', (d) => {
-      body += d;
-    });
+      body += d
+    })
     http_res.on('end', () => {
       // Request complete. Return data
-      res.json(JSON.parse(body));
-    });
-  });
+      res.json(JSON.parse(body))
+    })
+  })
   http_req.on('error', (error) => {
-    console.error(error);
-  });
-  http_req.end();
-};
+    console.error(error)
+  })
+  http_req.end()
+}
 
 module.exports = {
   getTickers: getTickers,
-};
+}

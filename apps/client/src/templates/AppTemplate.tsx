@@ -1,9 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { StocksProvider } from '../context/StocksContext';
-import { HistoryPage } from '../pages/HistoryPage';
-import { HomePage } from '../pages/HomePage';
-import styles from './AppTemplate.module.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import { StocksProvider } from '../context/StocksContext'
+import { HistoryPage } from '../pages/HistoryPage'
+import { HomePage } from '../pages/HomePage'
+import styles from './AppTemplate.module.css'
 
 export const AppTemplate = () => {
   return (
@@ -19,5 +19,5 @@ export const AppTemplate = () => {
         </Router>
       </div>
     </StocksProvider>
-  );
+  )
 }
