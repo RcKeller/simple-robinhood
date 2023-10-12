@@ -14,7 +14,7 @@ export const getStocks = (req, res) => {
     // Use heroku hostname from env variables if in production; otherwise, use localhost for dev
     hostname: process.env.API_URL || 'localhost',
     // Use heroku post if in production, otherwise use 5000 for dev
-    port: (!process.env.API_URL && process.env.PORT) || 5000,
+    port: process.env.API_URL ? 80 : 5000,
     path: '/stocks',
     method: 'POST',
     headers: {

@@ -5,7 +5,7 @@ export const getTickers = (req, res) => {
   // Options for request
   const options = {
     hostname: process.env.API_URL || 'localhost',
-    port: (!process.env.API_URL && process.env.PORT) || 5000,
+    port: process.env.API_URL ? 80 : 5000,
     path: '/tickers',
     method: 'GET',
   }
