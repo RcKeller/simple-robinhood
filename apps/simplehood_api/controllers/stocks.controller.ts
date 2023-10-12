@@ -1,7 +1,7 @@
-const http = require('http')
+import http from 'http'
 
 // API Route to get stock prices
-const getStocks = (req, res) => {
+export const getStocks = (req, res) => {
   if (!req || !req.body || !req.body.tickers) return res.json([])
   // Get tickers for which prices were requested for
   const tickers = req.body.tickers
@@ -42,7 +42,7 @@ const getStocks = (req, res) => {
 }
 
 // API Route to get historical stock prices
-const getHistory = (req, res) => {
+export const getHistory = (req, res) => {
   // Get stock ticker
   const ticker = req.params.ticker
   // Options for request. Use same hostname and port as before
@@ -66,9 +66,4 @@ const getHistory = (req, res) => {
     console.error(error)
   })
   http_req.end()
-}
-
-module.exports = {
-  getStocks: getStocks,
-  getHistory: getHistory,
 }

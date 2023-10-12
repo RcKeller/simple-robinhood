@@ -26,13 +26,15 @@
     "dotenv": "^8.2.0",
     "dotenv-cli": "^7.3.0",
     "express": "^4.17.1",
-    "nodemon": "^3.0.1",
     "mongoose": "^5.11.7",
+    "nodemon": "^3.0.1",
     "serve": "^13.0.4",
-    "turbo": "^1.10.15"
+    "turbo": "^1.10.15",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "eslint": "^8.48.0",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "ts-node": "^10.9.1"
   }
 }
