@@ -1,3 +1,2 @@
-export * from "./Price";
-export * from "./Ticker";
-
+export * from './Price'
+export * from './Ticker'

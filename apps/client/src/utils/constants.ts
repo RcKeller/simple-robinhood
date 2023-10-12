@@ -25,7 +25,7 @@ export const chart_options = {
     },
     labels: {
       formatter: function (val: any) {
-        return val?.toFixed(0);
+        return val?.toFixed(0)
       },
     },
   },
@@ -46,8 +46,8 @@ export const chart_options = {
     },
     y: {
       formatter: function (val: any) {
-        return val.toFixed(2);
+        return val.toFixed(2)
       },
     },
   },
-};
+}

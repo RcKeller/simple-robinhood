@@ -17,8 +17,7 @@
     "build": "dotenv -e .env turbo run build",
     "dev": "dotenv -e .env turbo run dev",
     "start": "dotenv -e .env turbo run start",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "format:dry": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "author": "Andy Barrows <andy@barrfitz.com>",
   "license": "MIT",

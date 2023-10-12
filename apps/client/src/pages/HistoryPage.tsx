@@ -1,44 +1,46 @@
-import { Price, Ticker } from '@rckeller/robinhood-ui';
-import axios from 'axios';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import Chart from 'react-apexcharts';
-import { Row, Spinner } from 'react-bootstrap';
-import { Link, useParams } from 'react-router-dom';
-import { useStocks } from '../context/StocksContext';
-import { chart_options } from '../utils/constants';
-import styles from './HistoryPage.module.css';
-import common_styles from './Page.module.css';
+import { Price, Ticker } from '@rckeller/robinhood-ui'
+import axios from 'axios'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import Chart from 'react-apexcharts'
+import { Row, Spinner } from 'react-bootstrap'
+import { Link, useParams } from 'react-router-dom'
+import { useStocks } from '../context/StocksContext'
+import { chart_options } from '../utils/constants'
+import styles from './HistoryPage.module.css'
+import common_styles from './Page.module.css'
 
 export const HistoryPage = () => {
-  const { stocks } = useStocks();
-  const { ticker } = useParams();
-  const [history, setHistory] = useState([]);
+  const { stocks } = useStocks()
+  const { ticker } = useParams()
+  const [history, setHistory] = useState([])
   const index = useMemo(() => {
     for (let i = 0; i < stocks.length; i++) {
-      if (stocks[i][0] === ticker) return i;
+      if (stocks[i][0] === ticker) return i
     }
-    return -1;
-  }, [stocks, ticker]);
+    return -1
+  }, [stocks, ticker])
 
   const getHistory = useCallback(() => {
     axios
-      .get(`${process.env.REACT_APP_SIMPLEHOOD_API_HOST}/stocks/history/${ticker}`)
+      .get(
+        `${process.env.REACT_APP_SIMPLEHOOD_API_HOST}/stocks/history/${ticker}`
+      )
       .then((response) => {
-        setHistory(response.data);
+        setHistory(response.data)
       })
       .catch((error) => {
-        console.log(error);
-      });
-  }, [ticker]);
+        console.log(error)
+      })
+  }, [ticker])
 
   useEffect(() => {
-    getHistory();
-    const interval = setInterval(getHistory, 60000);
+    getHistory()
+    const interval = setInterval(getHistory, 60000)
 
     return () => {
-      clearInterval(interval);
-    };
-  }, [ticker, getHistory]);
+      clearInterval(interval)
+    }
+  }, [ticker, getHistory])
 
   const price = stocks[index][1] || 0
   const color = stocks[index][2]
@@ -59,9 +61,7 @@ export const HistoryPage = () => {
             {ticker && <Ticker ticker={ticker} />}
           </Row>
           <Row className={styles.price + ' mx-auto justify-content-center'}>
-            {index !== -1 && (
-              <Price price={price} color={color} />
-            )}
+            {index !== -1 && <Price price={price} color={color} />}
           </Row>
           <Row className="mx-auto">
             <Chart
@@ -77,5 +77,5 @@ export const HistoryPage = () => {
         <div>Invalid Ticker</div>
       )}
     </div>
-  );
-};
+  )
+}
