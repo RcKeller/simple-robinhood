@@ -1,16 +1,11 @@
 const mongoose = require("mongoose");
 const Stock = require("../models/stocks.model");
 const Ticker = require("../models/tickers.model");
-
+const { weightedRandBetween } = require('../lib/weightedRandBetween')
 // Object to hold prices that will be updated every second
 let stocks;
 // Counts how many seconds the program has been running for
 let cnt = 0;
-
-// Get random number in between a and b
-const randBetween = (a, b) => {
-  return Math.random() * (b - a) + a;
-};
 
 const TICKERS = [
   { name: "AAPL", init_price: 100 },
@@ -54,8 +49,10 @@ const test = setInterval(() => {
     stocks[ticker];
     // Previous price
     const prev_price = stocks[ticker];
-    // Set new price
-    stocks[ticker] = randBetween(0.95 * prev_price, 1.05 * prev_price);
+    // Calculate standard deviation based on 5% of the prev price
+    const stdDev = 0.05 * prev_price;
+    // Set new price using weighted randomization (prevents excess deviation)
+    stocks[ticker] = weightedRandBetween(prev_price, stdDev);
     // Add to historical data in db every minute
     if (cnt % 60 === 0) {
       const newStockEvent = new Stock({
