@@ -1,7 +1,7 @@
-const http = require('http')
+import http from 'http'
 
 // API Route to fetch list of tickers
-const getTickers = (req, res) => {
+export const getTickers = (req, res) => {
   // Options for request
   const options = {
     hostname: process.env.API_URL || 'localhost',
@@ -23,8 +23,4 @@ const getTickers = (req, res) => {
     console.error(error)
   })
   http_req.end()
-}
-
-module.exports = {
-  getTickers: getTickers,
 }
