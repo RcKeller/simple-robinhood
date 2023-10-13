@@ -8,13 +8,13 @@ interface TickerType {
   init_price: number
 }
 
-// Define the structure of stocks
 interface StocksType {
   [key: string]: number
 }
 
-let stocks: StocksType
+let stocks: StocksType | null = null
 let cnt: number = 0
+let initialPrices: { [key: string]: number } = {}
 
 const TICKERS: TickerType[] = [
   { name: 'AAPL', init_price: 100 },
@@ -26,7 +26,10 @@ const TICKERS: TickerType[] = [
 
 const initializeTickers = async (): Promise<void> => {
   await Promise.all(
-    TICKERS.map(async (ticker: TickerType) => await Ticker.create(ticker))
+    TICKERS.map(async (ticker: TickerType) => {
+      await Ticker.create(ticker)
+      initialPrices[ticker.name] = ticker.init_price
+    })
   )
 }
 
@@ -42,7 +45,8 @@ const initializeStocks = (): void => {
           ticker: ticker.name,
         }).sort({ createdAt: -1 })
         if (stocks && latestStockEvent) {
-          stocks[ticker.name] = latestStockEvent.price || ticker.init_price
+          stocks[ticker.name] =
+            latestStockEvent.price || initialPrices[ticker.name]
         }
       }
     })
@@ -52,9 +56,9 @@ const initializeStocks = (): void => {
 const test = setInterval(() => {
   if (!stocks) initializeStocks()
   for (let ticker in stocks) {
-    const prev_price: number = stocks[ticker]
-    const stdDev: number = 0.05 * prev_price
-    stocks[ticker] = weightedRandBetween(prev_price, stdDev)
+    const init_price: number = initialPrices[ticker]
+    const stdDev: number = 0.05 * init_price
+    stocks[ticker] = weightedRandBetween(init_price, stdDev)
     if (cnt % 60 === 0) {
       const newStockEvent = new Stock({
         ticker: ticker,
